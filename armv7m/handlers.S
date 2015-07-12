@@ -38,56 +38,19 @@ _reset:
 hang:
     b       .
 
-.global nmi_handler
-.weak nmi_handler
-.type nmi_handler, %function
-nmi_handler:
-    b       hang
+/* Define weak default handlers which simply hang. */
+.macro hang_exception name
+    .global \name
+    .weak \name
+    .thumb_set \name, hang
+.endm
 
-.global hardfault_handler
-.weak hardfault_handler
-.type hardfault_handler, %function
-hardfault_handler:
-    b       hang
-
-.global memmanage_handler
-.weak memmanage_handler
-.type memmanage_handler, %function
-memmanage_handler:
-    b       hang
-
-.global busfault_handler
-.weak busfault_handler
-.type busfault_handler, %function
-busfault_handler:
-    b       hang
-
-.global usagefault_handler
-.weak usagefault_handler
-.type usagefault_handler, %function
-usagefault_handler:
-    b       hang
-
-.global svc_handler
-.weak svc_handler
-.type svc_handler, %function
-svc_handler:
-    b       hang
-
-.global debug_handler
-.weak debug_handler
-.type debug_handler, %function
-debug_handler:
-    b       hang
-
-.global pendsv_handler
-.weak pendsv_handler
-.type pendsv_handler, %function
-pendsv_handler:
-    b       hang
-
-.global systick_handler
-.weak systick_handler
-.type systick_handler, %function
-systick_handler:
-    b       hang
+hang_exception nmi_handler
+hang_exception hardfault_handler
+hang_exception memmanage_handler
+hang_exception busfault_handler
+hang_exception usagefault_handler
+hang_exception svc_handler
+hang_exception debug_handler
+hang_exception pendsv_handler
+hang_exception systick_handler
