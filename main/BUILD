@@ -1,13 +1,20 @@
 cc_binary(
     name = "main",
     srcs = ["main.c"],
-    deps = ["//mult"],
+    deps = [
+        "//mult",
+        "//stm32f4:vector_table",
+        "//stm32f4:link.ld",
+    ],
     copts = [
         "-nostdlib",
         "-ffreestanding",
     ],
     linkopts = [
+        "-static",
         "-nostdlib",
-        "-Ttext=0x8000000",
+        "-T",
+        "//stm32f4:link.ld",
     ],
+    linkstatic = 1,
 )
