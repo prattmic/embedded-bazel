@@ -1,8 +1,7 @@
 cc_binary(
-    name = "main",
+    name = "blink",
     srcs = ["main.c"],
     deps = [
-        "//mult",
         "//stm32f4:vector_table",
         "//stm32f4:link.ld",
     ],
@@ -21,7 +20,7 @@ cc_binary(
 
 genrule(
     name = "bin",
-    outs = ["main.bin"],
-    srcs = [":main"],
+    outs = ["blink.bin"],
+    srcs = [":blink"],
     cmd = "arm-none-eabi-objcopy -O binary $< $@",
 )
