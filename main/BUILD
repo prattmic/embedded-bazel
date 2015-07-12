@@ -18,3 +18,10 @@ cc_binary(
     ],
     linkstatic = 1,
 )
+
+genrule(
+    name = "bin",
+    outs = ["main.bin"],
+    srcs = [":main"],
+    cmd = "arm-none-eabi-objcopy -O binary $< $@",
+)
