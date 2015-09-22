@@ -3,7 +3,10 @@ load("/tools/raw_binary", "raw_binary")
 
 stm32f4_binary(
     name = "blink",
-    srcs = ["main.c"],
+    srcs = [
+        "main.c",
+        "@libopencm3//:stm32f4",
+    ],
 )
 
 raw_binary(
