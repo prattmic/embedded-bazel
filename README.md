@@ -12,4 +12,4 @@ Discovery board:
 
 Then you can flash the output to the board and watch it blink!
 
-    $ st-flash write bazel-genfiles/blink/blink.bin 0x8000000
+    $ st-flash write bazel-genfiles/blink/bin.bin 0x8000000
