@@ -4,9 +4,7 @@ Embedded Workspace for Bazel
 This workspace provides basic support for building for ARM Cortex-M4
 with Bazel.
 
-To build, you must specify `--cpu=cortex-m4`, as well as the host and target
-`crosstool_top`. For example, to build the blink example for the STM32F4
-Discovery board:
+For example, to build the blink example for the STM32F4 Discovery board:
 
     $ bazel build //blink:bin
 
