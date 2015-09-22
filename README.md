@@ -8,7 +8,7 @@ To build, you must specify `--cpu=cortex-m4`, as well as the host and target
 `crosstool_top`. For example, to build the blink example for the STM32F4
 Discovery board:
 
-    $ bazel build --crosstool_top=//toolchain --host_crosstool_top=//tools/cpp:toolchain --cpu=cortex-m4 //blink:bin
+    $ bazel build //blink:bin
 
 Then you can flash the output to the board and watch it blink!
 
