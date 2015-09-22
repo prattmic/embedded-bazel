@@ -1,21 +1,8 @@
-cc_binary(
+load("/stm32f4/binary", "stm32f4_binary")
+
+stm32f4_binary(
     name = "blink",
     srcs = ["main.c"],
-    deps = [
-        "//stm32f4:vector_table",
-        "//stm32f4:link.ld",
-    ],
-    copts = [
-        "-nostdlib",
-        "-ffreestanding",
-    ],
-    linkopts = [
-        "-static",
-        "-nostdlib",
-        "-T",
-        "//stm32f4:link.ld",
-    ],
-    linkstatic = 1,
 )
 
 genrule(
