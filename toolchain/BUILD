@@ -5,11 +5,11 @@ filegroup(
     srcs = [],
 )
 
-filegroup(
+cc_toolchain_suite(
     name = "toolchain",
-    srcs = [
-        ":cc-compiler-cortex-m4",
-    ],
+    toolchains = {
+        "cortex-m4|compiler": ":cc-compiler-cortex-m4",
+    },
 )
 
 cc_toolchain(
