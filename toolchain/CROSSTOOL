@@ -32,7 +32,19 @@ toolchain {
   tool_path { name: "gcc" path: "/usr/bin/arm-none-eabi-gcc" }
   compiler_flag: "-mcpu=cortex-m4"
   compiler_flag: "-mthumb"
-  #cxx_flag: "-std=c++0x"
+  cxx_flag: "-std=c++14"
+  linker_flag: "-lstdc++"
+
+  # Utilize "nano" libc and libstdc++. These are included in the Debian
+  # libstdc++-arm-none-eabi package. They are built with no exceptions and
+  # short wchar to reduce code and data size.
+  compiler_flag: "-specs=/usr/lib/arm-none-eabi/lib/nano.specs"
+  compiler_flag: "-fno-exceptions"
+  compiler_flag: "-fshort-wchar"
+  linker_flag: "-specs=/usr/lib/arm-none-eabi/lib/nano.specs"
+  # crtbegin.o is unfortunately not built with -fshort-wchar, so the linker
+  # complains, but we know it doesn't actually use wchar_t.
+  linker_flag: "-Wl,--no-wchar-size-warning"
 
   # TODO(bazel-team): In theory, the path here ought to exactly match the path
   # used by gcc. That works because bazel currently doesn't track files at
@@ -53,4 +65,19 @@ toolchain {
   objcopy_embed_flag: "binary"
   tool_path { name: "objdump" path: "/usr/bin/arm-none-eabi-objdump" }
   tool_path { name: "strip" path: "/usr/bin/arm-none-eabi-strip" }
+
+  # Always enable debug symbols, since only raw binaries will be deployed
+  # anyways.
+  compiler_flag: "-g3"
+
+  compilation_mode_flags {
+    mode: OPT
+    # Optimize for size.
+    compiler_flag: "-Os"
+
+    # Removal of unused code and data at link time.
+    compiler_flag: "-ffunction-sections"
+    compiler_flag: "-fdata-sections"
+    linker_flag: "-Wl,--gc-sections"
+  }
 }
