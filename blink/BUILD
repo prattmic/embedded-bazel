@@ -1,5 +1,5 @@
-load("/stm32f4/binary", "stm32f4_binary")
-load("/tools/raw_binary", "raw_binary")
+load("//stm32f4:binary.bzl", "stm32f4_binary")
+load("//tools:raw_binary.bzl", "raw_binary")
 
 stm32f4_binary(
     name = "blink",
