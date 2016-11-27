@@ -3,7 +3,7 @@ load("//tools:raw_binary.bzl", "raw_binary")
 
 stm32f4_binary(
     name = "blink",
-    srcs = ["main.c"],
+    srcs = ["main.cc"],
 )
 
 raw_binary(

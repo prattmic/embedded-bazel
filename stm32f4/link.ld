@@ -33,6 +33,20 @@ SECTIONS {
     } > "flash"
     AT> "flash"
 
+    .ARM.extab :
+    {
+      *(.ARM.extab* .gnu.linkonce.armextab.*)
+    } > "flash"
+    AT> "flash"
+
+    __exidx_start = .;
+    .ARM.exidx :
+    {
+      *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+    } > "flash"
+    AT> "flash"
+    __exidx_end = .;
+
     .data :
     {
         . = ALIGN(8);
@@ -48,11 +62,18 @@ SECTIONS {
     .bss :
     {
         . = ALIGN(8);
-        _bss_start = .;
+        __bss_start__ = .;
         *(.bss*)
         *(COMMON)
-        _bss_end = .;
+        __bss_end__ = .;
         . = ALIGN(8);
     } > "ccmram"
+    AT> "flash"
+
+    .heap :
+    {
+        . = ALIGN(8);
+        _end = .;
+    } > "ram"
     AT> "flash"
 }

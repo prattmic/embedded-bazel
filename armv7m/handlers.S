@@ -31,7 +31,7 @@
 .global _reset
 .type _reset, %function
 _reset:
-    b       _start
+    b       _start  /* Defined in crt0 */
 
 .global hang
 .type hang, %function
